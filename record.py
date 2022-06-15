@@ -29,9 +29,9 @@ else:
 
 from utils import Screenshot, XboxController
 
-IMAGE_SIZE = (320, 240)
-IDLE_SAMPLE_RATE = 1500
-SAMPLE_RATE = 200
+IMAGE_SIZE = (420, 240)
+IDLE_SAMPLE_RATE = 5
+SAMPLE_RATE = 5
 IMAGE_TYPE = ".png"
 
 class MainWindow():

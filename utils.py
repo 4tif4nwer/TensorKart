@@ -24,8 +24,8 @@ def resize_image(img):
 
 
 class Screenshot(object):
-    SRC_W = 640
-    SRC_H = 480
+    SRC_W = 1920
+    SRC_H = 1080
     SRC_D = 3
 
     OFFSET_X = 0
@@ -33,8 +33,8 @@ class Screenshot(object):
 
 
 class Sample:
-    IMG_W = 200
-    IMG_H = 66
+    IMG_W = 1920
+    IMG_H = 1080
     IMG_D = 3
 
 
@@ -73,9 +73,10 @@ class XboxController(object):
     def read(self):
         x = self.LeftJoystickX
         y = self.LeftJoystickY
-        a = self.A
-        b = self.X # b=1, x=2
-        rb = self.RightBumper
+        a = self.LeftTrigger
+        b = self.RightTrigger
+        rb = self.Y # b=1, x=2
+        
         return [x, y, a, b, rb]
 
 
@@ -102,9 +103,9 @@ class XboxController(object):
                 elif event.code == 'BTN_SOUTH':
                     self.A = event.state
                 elif event.code == 'BTN_NORTH':
-                    self.X = event.state
-                elif event.code == 'BTN_WEST':
                     self.Y = event.state
+                elif event.code == 'BTN_WEST':
+                    self.X = event.state
                 elif event.code == 'BTN_EAST':
                     self.B = event.state
                 elif event.code == 'BTN_THUMBL':
@@ -152,12 +153,12 @@ class Data(object):
 
 
 def load_sample(sample):
-    image_files = np.loadtxt(sample + '/data.csv', delimiter=',', dtype=str, usecols=(0,))
-    joystick_values = np.loadtxt(sample + '/data.csv', delimiter=',', usecols=(1,2,3,4,5))
+    image_files = np.loadtxt(sample, delimiter=',', dtype=str, usecols=(0,))
+    joystick_values = np.loadtxt(sample, delimiter=',', usecols=(1,2,3,4,5))
     return image_files, joystick_values
 
 def load_imgs(sample):
-    image_files = np.loadtxt(sample + '/data.csv', delimiter=',', dtype=str, usecols=(0,))
+    image_files = np.loadtxt(sample, delimiter=',', dtype=str, usecols=(0,))
     return image_files
 
 # training data viewer
@@ -205,7 +206,7 @@ def viewer(sample):
 # prepare training data
 def prepare(samples):
     print("Preparing data")
-
+    num_samples=0
     for sample in samples:
         image_files = load_imgs(sample)
         num_samples += len(image_files)

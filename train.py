@@ -31,7 +31,8 @@ def create_model(keep_prob = 0.8):
     model = Sequential()
 
     # NVIDIA's model
-    model.add(Conv2D(24, kernel_size=(5, 5), strides=(2, 2), activation='relu', input_shape= INPUT_SHAPE))
+    model.add(tf.keras.layers.Resizing(68,120,input_shape = INPUT_SHAPE))
+    model.add(Conv2D(24, kernel_size=(5, 5), strides=(2, 2), activation='relu'))
     model.add(Conv2D(36, kernel_size=(5, 5), strides=(2, 2), activation='relu'))
     model.add(Conv2D(48, kernel_size=(5, 5), strides=(2, 2), activation='relu'))
     model.add(Conv2D(64, kernel_size=(3, 3), activation='relu'))
@@ -67,5 +68,5 @@ if __name__ == '__main__':
     checkpoint = ModelCheckpoint('model_weights.h5', monitor='val_loss', verbose=1, save_best_only=True, mode='min')
     callbacks_list = [checkpoint]
     
-    model.compile(loss=customized_loss, optimizer=optimizers.adam())
+    model.compile(loss=customized_loss, optimizer=optimizers.Adam())
     model.fit(x_train, y_train, batch_size=batch_size, epochs=epochs, shuffle=True, validation_split=0.1, callbacks=callbacks_list)
