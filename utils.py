@@ -154,7 +154,7 @@ class Data(object):
 
 def load_sample(sample):
     image_files = np.loadtxt(sample, delimiter=',', dtype=str, usecols=(0,))
-    joystick_values = np.loadtxt(sample, delimiter=',', usecols=(1,2,3,4,5))
+    joystick_values = np.loadtxt(sample, delimiter=',', usecols=(1,3,4,5))
     return image_files, joystick_values
 
 def load_imgs(sample):
@@ -223,7 +223,7 @@ def prepare(samples):
         image_files, joystick_values = load_sample(sample)
 
         # add joystick values to y
-        y.append([joystick_values[0],joystick_values[2],joystick_values[3],joystick_values[4]])
+        y.append(joystick_values)
 
         # load, prepare and add images to X
         for image_file in image_files:
