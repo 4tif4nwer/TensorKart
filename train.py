@@ -11,7 +11,7 @@ from tensorflow.keras.callbacks import ModelCheckpoint
 from utils import Sample
 
 # Global variable
-OUT_SHAPE = 5
+OUT_SHAPE = 4
 INPUT_SHAPE = (Sample.IMG_H, Sample.IMG_W, Sample.IMG_D)
 
 
@@ -31,7 +31,7 @@ def create_model(keep_prob = 0.8):
     model = Sequential()
 
     # NVIDIA's model
-    model.add(tf.keras.layers.Resizing(68,120,input_shape = INPUT_SHAPE))
+    model.add(tf.keras.layers.Resizing(270,480,input_shape = INPUT_SHAPE))
     model.add(Conv2D(24, kernel_size=(5, 5), strides=(2, 2), activation='relu'))
     model.add(Conv2D(36, kernel_size=(5, 5), strides=(2, 2), activation='relu'))
     model.add(Conv2D(48, kernel_size=(5, 5), strides=(2, 2), activation='relu'))

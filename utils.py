@@ -223,7 +223,7 @@ def prepare(samples):
         image_files, joystick_values = load_sample(sample)
 
         # add joystick values to y
-        y.append(joystick_values)
+        y.append([joystick_values[0],joystick_values[2],joystick_values[3],joystick_values[4]])
 
         # load, prepare and add images to X
         for image_file in image_files:

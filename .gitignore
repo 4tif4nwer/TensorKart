@@ -6,3 +6,6 @@ model.ckpt*
 *.gif
 *.ogv
 *.mp4
+data/.keep
+model_weights.h5
+trial
